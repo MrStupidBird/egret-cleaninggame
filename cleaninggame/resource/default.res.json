@@ -1,0 +1,80 @@
+{
+	"groups": [
+		{
+			"name": "preload",
+			"keys": "bg4_png,hero0_png,hero1_png,hero2_png,hero3_png,prop_column_png,prop_cross_png,prop_one_png,prop_row_png,bg_png,bg0_png,round1_json,hero5_png,hero4_png"
+		}
+	],
+	"resources": [
+		{
+			"name": "bg4_png",
+			"type": "image",
+			"url": "res/bg4.png"
+		},
+		{
+			"name": "hero0_png",
+			"type": "image",
+			"url": "res/hero0.png"
+		},
+		{
+			"name": "hero1_png",
+			"type": "image",
+			"url": "res/hero1.png"
+		},
+		{
+			"name": "hero2_png",
+			"type": "image",
+			"url": "res/hero2.png"
+		},
+		{
+			"name": "hero3_png",
+			"type": "image",
+			"url": "res/hero3.png"
+		},
+		{
+			"name": "prop_column_png",
+			"type": "image",
+			"url": "res/prop_column.png"
+		},
+		{
+			"name": "prop_cross_png",
+			"type": "image",
+			"url": "res/prop_cross.png"
+		},
+		{
+			"name": "prop_one_png",
+			"type": "image",
+			"url": "res/prop_one.png"
+		},
+		{
+			"name": "prop_row_png",
+			"type": "image",
+			"url": "res/prop_row.png"
+		},
+		{
+			"name": "bg_png",
+			"type": "image",
+			"url": "res/bg.png"
+		},
+		{
+			"name": "bg0_png",
+			"type": "image",
+			"url": "res/bg0.png"
+		},
+		{
+			"name": "round1_json",
+			"type": "json",
+			"url": "res/round1.json"
+		},
+		{
+			"name": "hero5_png",
+			"type": "image",
+			"url": "res/hero5.png"
+		},
+		{
+			"name": "hero4_png",
+			"type": "image",
+			"url": "res/hero4.png"
+		}
+	]
+}

@@ -1,0 +1,8 @@
+class MainViewController {
+
+
+	public constructor() {
+		
+	}
+
+}
