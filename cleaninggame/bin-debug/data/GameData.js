@@ -13,11 +13,18 @@ GameData.STAGE_HEIGHT = 0;
 /** MainView长宽最多格子数:8×8 **/
 GameData.MAX_UNITS_WIDTH = 8;
 GameData.MAX_UNITS_HEIGHT = 8;
-GameData.gameBgImg = "";
-// public static unusedMapData:number[] = [0];  //当前关卡64格地图中不予使用的格子
-GameData.levelReqStep = 0; //当前关卡限制游戏步数
-GameData.usedElementTypes = [""]; //当前关卡使用的消除元素类型
+GameData.levelNum = 5; //关卡总数
+GameData.gameBgImg = ""; //主舞台背景图片	
 GameData.elementTypes = [""]; //游戏可使用的所有消除元素类型
-GameData.mapUnitsData = [0]; //记录64个地图单位使用情况，-1为不可使用
+/**消除元素
+ * 用户点击过程中做flag使用
+ * */
+GameData.firstTouched = false;
+GameData.secondTouched = false;
+GameData.firstTouchedElementIndex = null;
+GameData.levelReqStep = 0; //当前关卡限制游戏【步数】
+GameData.usedElementTypes = [""]; //当前关卡使用的消除元素类型
+/**通关 */
+GameData.passedLevelNum = 0;
 __reflect(GameData.prototype, "GameData");
 //# sourceMappingURL=GameData.js.map

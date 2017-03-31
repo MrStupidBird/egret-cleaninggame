@@ -9,42 +9,52 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var MainView = (function (_super) {
     __extends(MainView, _super);
-    function MainView() {
-        return _super.call(this) || this;
+    function MainView(main) {
+        var _this = _super.call(this) || this;
+        _this._main = main;
+        return _this;
     }
+    MainView.prototype.addGameEventListener = function () {
+        this.addEventListener(GameEvent.GAME_OVER, this._main.gameOver, this._main);
+        this.addEventListener(GameEvent.TO_NEXT_LEVEL, this._main.toNextLevel, this._main);
+        this.addEventListener(GameEvent.Pass_Game, this._main.passGame, this._main);
+    };
+    MainView.prototype.order = function (event) {
+        var evt = new GameEvent(event);
+        this.dispatchEvent(evt);
+    };
     MainView.prototype.createView = function () {
-        if (!this.gameElements) {
-            this.gameElements = new Array();
-        }
-        if (!this.bmpElements) {
-            this.bmpElements = new Array();
-        }
         var girdSideLength = (GameData.STAGE_WIDTH - 40) / GameData.MAX_UNITS_WIDTH;
         var girdBg;
         var girdElement;
         for (var j = 0; j < GameData.MAX_UNITS_HEIGHT; j++) {
             for (var i = 0; i < GameData.MAX_UNITS_WIDTH; i++) {
-                if (GameData.mapUnitsData[j * GameData.MAX_UNITS_WIDTH + i] != -1) {
-                    if (this.gameElements.length < (j * GameData.MAX_UNITS_WIDTH + i + 1)) {
-                        girdElement = new GameElement();
-                        girdElement.type = GameData.usedElementTypes[this.getTypeNum()];
-                        girdElement.location = i + j * GameData.MAX_UNITS_WIDTH;
-                        this.gameElements.push(girdElement);
-                    }
-                    else {
-                        girdElement = this.gameElements[j * GameData.MAX_UNITS_WIDTH + i];
-                    }
+                if (!this.isUnusedUnit(j * GameData.MAX_UNITS_WIDTH + i)) {
+                    girdElement = new GameElement();
+                    girdElement.type = GameData.usedElementTypes[this.getTypeNum()];
+                    girdElement.location = i + j * GameData.MAX_UNITS_WIDTH;
+                    GameData.gameElements[j * GameData.MAX_UNITS_WIDTH + i] = girdElement;
+                    girdElement.width = girdSideLength;
+                    girdElement.height = girdSideLength;
+                    girdElement.x = 20 + girdSideLength * i;
+                    girdElement.y = girdSideLength * j;
                     girdBg = new egret.Bitmap();
                     girdBg.width = girdSideLength;
                     girdBg.height = girdSideLength;
-                    girdBg.x = 20 + girdSideLength * i;
-                    girdBg.y = girdSideLength * j;
                     girdBg.texture = RES.getRes(girdElement.type);
-                    console.log("girdElement.type: " + girdElement.type);
-                    this.addChild(girdBg);
+                    //console.log("girdElement.type: "+girdElement.type);
+                    girdElement.bmp = girdBg;
+                    girdElement.addChild(girdBg);
+                    this.addChild(girdElement);
                 }
             }
         }
+    };
+    /** 正式开始游戏前的预清理 **/
+    MainView.prototype.preClean = function () {
+        this._mainViewController = new MainViewController(this, this);
+        this._mainViewController.preClean();
+        this._mainViewController.addElementListenser();
     };
     /** 生成随机类型的游戏元素 **/
     MainView.prototype.getTypeNum = function () {
@@ -52,8 +62,17 @@ var MainView = (function (_super) {
         while (n >= (0.1 * GameData.usedElementTypes.length)) {
             n = Math.random();
         }
-        console.log("getTypeNum():" + Math.floor(n * 10));
+        //console.log("getTypeNum():"+Math.floor(n*10));
         return Math.floor(n * 10);
+    };
+    /** 检验是否是不可用地图单元 **/
+    MainView.prototype.isUnusedUnit = function (num) {
+        for (var i = 0; i < GameData.unusedMapUnits.length; i++) {
+            if (num == GameData.unusedMapUnits[i]) {
+                return true;
+            }
+        }
+        return false;
     };
     return MainView;
 }(egret.Sprite));

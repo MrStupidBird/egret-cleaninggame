@@ -31,16 +31,21 @@
 
     <!--这个标签为不通过egret提供的第三方库的方式使用的 javascript 文件，请将这些文件放在libs下，但不要放在modules下面。-->
     <!--other_libs_files_start-->
-    <script egret="lib" src="polyfill/promise.js" src-release="polyfill/promise.min.js"></script>
     <!--other_libs_files_end-->
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
 	<script egret="game" src="bin-debug/element/BaseElement.js"></script>
-	<script egret="game" src="bin-debug/controller/GameViewCreator.js"></script>
+	<script egret="game" src="bin-debug/element/LevelLimitNumElement.js"></script>
+	<script egret="game" src="bin-debug/controller/PropViewController.js"></script>
 	<script egret="game" src="bin-debug/data/GameData.js"></script>
 	<script egret="game" src="bin-debug/data/GameDataParser.js"></script>
+	<script egret="game" src="bin-debug/controller/GameViewCreator.js"></script>
 	<script egret="game" src="bin-debug/element/GameElement.js"></script>
+	<script egret="game" src="bin-debug/controller/MainViewController.js"></script>
+	<script egret="game" src="bin-debug/element/LevelReqElement.js"></script>
+	<script egret="game" src="bin-debug/element/PropElement.js"></script>
+	<script egret="game" src="bin-debug/event/GameEvent.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/view/LevelReqView.js"></script>
 	<script egret="game" src="bin-debug/view/MainView.js"></script>
@@ -52,7 +57,7 @@
     <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
          data-entry-class="Main"
          data-orientation="auto"
-         data-scale-mode="noScale"
+         data-scale-mode="showAll"
          data-frame-rate="30"
          data-content-width="640"
          data-content-height="1136"

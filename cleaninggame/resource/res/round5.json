@@ -1,0 +1,8 @@
+{
+	"map":[],
+	"step":30,
+	"element":6,
+	"levelreq":[1,1,1,1,1,1],
+	"levelbgimg":"bg5_png",
+	"propnum":[3,3,3,3]
+}

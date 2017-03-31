@@ -3,6 +3,6 @@
 	"step":30,
 	"element":4,
 	"levelreq":[1,1,1,1],
-	"levelbgimg":"bg0_png",
-	"propnum":[1,1,1,1]
+	"levelbgimg":"bg2_png",
+	"propnum":[3,3,3,3]
 }

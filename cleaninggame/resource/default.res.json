@@ -2,7 +2,7 @@
 	"groups": [
 		{
 			"name": "preload",
-			"keys": "bg4_png,hero0_png,hero1_png,hero2_png,hero3_png,prop_column_png,prop_cross_png,prop_one_png,prop_row_png,bg_png,bg0_png,round1_json,hero5_png,hero4_png"
+			"keys": "bg4_png,hero0_png,hero1_png,hero2_png,hero3_png,prop_column_png,prop_cross_png,prop_one_png,prop_row_png,bg_png,bg0_png,round1_json,hero5_png,hero4_png,LevReqNum_png,round2_json,bg3_png,bg2_png,bg1_png,round3_json,round4_json,round5_json,gameover_png,gamesuccess_png"
 		}
 	],
 	"resources": [
@@ -75,6 +75,56 @@
 			"name": "hero4_png",
 			"type": "image",
 			"url": "res/hero4.png"
+		},
+		{
+			"name": "LevReqNum_png",
+			"type": "image",
+			"url": "res/LevReqNum.png"
+		},
+		{
+			"name": "round2_json",
+			"type": "json",
+			"url": "res/round2.json"
+		},
+		{
+			"name": "bg3_png",
+			"type": "image",
+			"url": "res/bg3.png"
+		},
+		{
+			"name": "bg2_png",
+			"type": "image",
+			"url": "res/bg2.png"
+		},
+		{
+			"name": "bg1_png",
+			"type": "image",
+			"url": "res/bg1.png"
+		},
+		{
+			"name": "round3_json",
+			"type": "json",
+			"url": "res/round3.json"
+		},
+		{
+			"name": "round4_json",
+			"type": "json",
+			"url": "res/round4.json"
+		},
+		{
+			"name": "round5_json",
+			"type": "json",
+			"url": "res/round5.json"
+		},
+		{
+			"name": "gameover_png",
+			"type": "image",
+			"url": "res/gameover.png"
+		},
+		{
+			"name": "gamesuccess_png",
+			"type": "image",
+			"url": "res/gamesuccess.png"
 		}
 	]
 }

@@ -3,14 +3,19 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
 var GameViewCreator = (function () {
-    //private mainViewSpr:egret.Sprite;
-    function GameViewCreator(spr) {
-        this.spr = spr;
+    function GameViewCreator(main) {
+        //this.doc = doc;
+        this._main = main;
     }
     GameViewCreator.prototype.createGameView = function () {
-        this.createBg();
-        this.createMainViewBg();
-        this.createMainView();
+        this.createBg(); //创建游戏关卡背景
+        this.createMainViewBg(); //创建MianView背景
+        this.createMainView(); //创建MainView
+        this.createPropView(); //创建PropView
+        this.createLevelReqView(); //创建关卡要求视图
+    };
+    GameViewCreator.prototype.clear = function () {
+        this._main.removeChildren();
     };
     /** 生成背景图片 **/
     GameViewCreator.prototype.createBg = function () {
@@ -20,7 +25,7 @@ var GameViewCreator = (function () {
         this.bmpBg.texture = RES.getRes(GameData.gameBgImg);
         this.bmpBg.width = GameData.STAGE_WIDTH;
         this.bmpBg.height = GameData.STAGE_WIDTH * 1.5;
-        this.spr.addChild(this.bmpBg);
+        this._main.addChild(this.bmpBg);
     };
     /** 生成MainView的背景 **/
     GameViewCreator.prototype.createMainViewBg = function () {
@@ -28,11 +33,11 @@ var GameViewCreator = (function () {
             this.mainViewBg = new Array();
         }
         var girdSideLength = (GameData.STAGE_WIDTH - 40) / GameData.MAX_UNITS_WIDTH;
-        var startY = GameData.STAGE_WIDTH * 1.5 * (1 / 5);
+        var startY = GameData.STAGE_WIDTH * 0.3;
         var girdBg;
         for (var j = 0; j < GameData.MAX_UNITS_HEIGHT; j++) {
             for (var i = 0; i < GameData.MAX_UNITS_WIDTH; i++) {
-                if (GameData.mapUnitsData[j * GameData.MAX_UNITS_WIDTH + i] != -1) {
+                if (!this.isUnusedUnit(j * GameData.MAX_UNITS_WIDTH + i)) {
                     if (this.mainViewBg.length < (j * GameData.MAX_UNITS_WIDTH + i + 1)) {
                         girdBg = new egret.Bitmap();
                         this.mainViewBg.push(girdBg);
@@ -45,17 +50,43 @@ var GameViewCreator = (function () {
                     girdBg.x = 20 + girdSideLength * i;
                     girdBg.y = startY + girdSideLength * j;
                     girdBg.texture = RES.getRes("bg_png");
-                    this.spr.addChild(girdBg);
+                    this._main.addChild(girdBg);
                 }
             }
         }
     };
     /** 生成MainView **/
     GameViewCreator.prototype.createMainView = function () {
-        this.mainView = new MainView();
-        this.mainView.y = GameData.STAGE_WIDTH * 1.5 * (1 / 5);
+        this.mainView = new MainView(this._main);
+        this.mainView.y = GameData.STAGE_WIDTH * 0.3;
         this.mainView.createView();
-        this.spr.addChild(this.mainView);
+        this.mainView.preClean();
+        this.mainView.addGameEventListener();
+        this._main.addChild(this.mainView);
+    };
+    /** 生成PropView **/
+    GameViewCreator.prototype.createPropView = function () {
+        var girdSideLength = (GameData.STAGE_WIDTH - 40) / GameData.MAX_UNITS_WIDTH;
+        this.propView = new PropView();
+        this.propView.y = GameData.STAGE_WIDTH * 0.3 + 8 * girdSideLength;
+        this.propView.createView();
+        this.propView.addOnPropTapListener();
+        this._main.addChild(this.propView);
+    };
+    /**生成关卡要求视图 */
+    GameViewCreator.prototype.createLevelReqView = function () {
+        this.levelReqView = new LevelReqView();
+        this.levelReqView.createView();
+        this._main.addChild(this.levelReqView);
+    };
+    /** 检验是否是不可用地图单元 **/
+    GameViewCreator.prototype.isUnusedUnit = function (num) {
+        for (var i = 0; i < GameData.unusedMapUnits.length; i++) {
+            if (num == GameData.unusedMapUnits[i]) {
+                return true;
+            }
+        }
+        return false;
     };
     return GameViewCreator;
 }());
